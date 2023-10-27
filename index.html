@@ -14,41 +14,18 @@
         padding: 2.23em;
       }
 
-      #title {
+      .title {
         color: #2c3e50;
         font-family: "Coda", sans-serif;
         text-align: center;
       }
-
-      #card {
+      .user-profile {
         margin: auto;
         width: 27em;
         height: 11em;
         background: #fff;
         border-radius: 0.3em;
       }
-
-      button {
-        background-color: #009879;
-        border-radius: 10%;
-        color: #fff;
-      }
-      #details {
-        background-color: #fff;
-      }
-      #name,
-      #nickname {
-        color: #009879;
-      }
-      p {
-        color: #b2b9bb;
-      }
-      #details {
-        display: flex;
-      }
-
-      /*  */
-      /*  */
 
       .user-profile #fullname {
         margin: auto;
@@ -116,21 +93,19 @@
     </style>
   </head>
   <body>
-    <main>
-      <h1 id="title">random user generator</h1>
-      <section id="card">
-        <div id="details">
-          <div id="picture"><img src="" alt="Avatar" /></div>
-          <div id="content">
-            <h2 id="name"></h2>
-            <h4 id="nickname"></h4>
-            <p>Email: <span id="email"></span></p>
-            <p>City: <span id="city"></span></p>
-          </div>
-        </div>
-        <button>Next User!</button>
-      </section>
-    </main>
+    <h1 class="title">Random User Generator</h1>
+    <div class="user-profile">
+      <img id="avatar" src="" />
+      <div id="fullname"></div>
+      <div id="username"></div>
+      <div class="description">
+        <div>Email: <span id="email"></span></div>
+        <div>City: <span id="city"></span></div>
+      </div>
+      <div class="footer">
+        <button id="btn">Next User!</button>
+      </div>
+    </div>
   </body>
 
   <script>
@@ -155,20 +130,22 @@
       const {
         avatar,
         address: { city, state, country },
+        username,
         email,
         gender,
         first_name,
         last_name,
       } = person;
-      document.querySelector("img").src = avatar;
+      document.querySelector("#avatar").src = avatar;
+      document.querySelector("#username").innerHTML = username;
+
       document.querySelector(
         "#city"
       ).innerHTML = `${city} ${state}, ${country}`;
       document.querySelector("#email").innerHTML = email;
       document.querySelector(
-        "h2"
-      ).innerHTML = `NAME:${first_name} ${last_name}`;
-      document.querySelector("h4").innerHTML = "GENDER: " + gender;
+        "#fullname"
+      ).innerHTML = `${first_name} ${last_name}`;
     }
   </script>
 </html>
