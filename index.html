@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random User App</title>
+    <style>
+      body {
+        background-color: #e8edf0;
+      }
+      button {
+        background-color: #009879;
+        border-radius: 10%;
+        color: #fff;
+      }
+      #details {
+        background-color: #fff;
+      }
+      #name,
+      #nickname {
+        color: #009879;
+      }
+      p {
+        color: #b2b9bb;
+      }
+      #details {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>random user generator</h1>
+      <section id="card">
+        <div id="details">
+          <div id="picture"><img src="" alt="" /></div>
+          <div id="content">
+            <h2 id="name"></h2>
+            <h4 id="nickname"></h4>
+            <p>Email: <span id="email"></span></p>
+            <p>City: <span id="city"></span></p>
+          </div>
+        </div>
+        <button>Next User!</button>
+      </section>
+    </main>
+  </body>
+
+  <script>
+    window.addEventListener("load", () => {
+      fetch("https://random-data-api.com/api/v2/users")
+        .then((res) => res.json())
+        .then((person) => {
+          loadData(person);
+        });
+    });
+
+    function loadData(person) {
+      const {
+        avatar,
+        address: { city, state, country },
+        email,
+        gender,
+        first_name,
+        last_name,
+      } = person;
+      document.querySelector("img").src = avatar;
+      document.querySelector(
+        "#city"
+      ).innerHTML = `${city} ${state}, ${country}`;
+      document.querySelector("#email").innerHTML = email;
+      document.querySelector("h2").innerHTML = `${first_name} ${last_name}`;
+      document.querySelector("h4").innerHTML = gender;
+    }
+  </script>
+</html>
