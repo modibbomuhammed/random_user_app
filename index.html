@@ -4,10 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random User App</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway|Varela+Round|Coda"
+    />
     <style>
       body {
-        background-color: #e8edf0;
+        background: #ecf0f1;
+        padding: 2.23em;
       }
+
+      #title {
+        color: #2c3e50;
+        font-family: "Coda", sans-serif;
+        text-align: center;
+      }
+
+      #card {
+        margin: auto;
+        width: 27em;
+        height: 11em;
+        background: #fff;
+        border-radius: 0.3em;
+      }
+
       button {
         background-color: #009879;
         border-radius: 10%;
@@ -26,14 +46,81 @@
       #details {
         display: flex;
       }
+
+      /*  */
+      /*  */
+
+      .user-profile #fullname {
+        margin: auto;
+        margin-top: -4.4em;
+        margin-left: 5.8em;
+        color: #16a085;
+        font-size: 1.53em;
+        font-family: "Coda", sans-serif;
+        font-weight: bold;
+      }
+
+      #username {
+        margin: auto;
+        display: inline-block;
+        margin-left: 10.43em;
+        color: #3498db;
+        font-size: 0.87em;
+        font-family: "varela round", sans-serif;
+      }
+
+      .user-profile > .description {
+        margin: auto;
+        margin-top: 1.35em;
+        margin-right: 3em;
+        width: 18em;
+        color: #7f8c8d;
+        font-size: 0.87em;
+        font-family: "varela round", sans-serif;
+      }
+
+      .user-profile > img#avatar {
+        padding: 0.7em;
+        margin-left: 0.3em;
+        margin-top: 0.3em;
+        height: 6.23em;
+        width: 6.23em;
+        border-radius: 18em;
+      }
+
+      .footer {
+        margin: 2em auto;
+        height: 3.7em;
+        background: #16a085;
+        text-align: center;
+        border-radius: 0 0 0.3em 0.3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.1s;
+      }
+
+      button {
+        color: white;
+        font-family: "Coda", sans-serif;
+        text-align: center;
+        font-size: 20px;
+        background: none;
+        outline: none;
+        border: 0;
+      }
+
+      .footer:hover {
+        background: #1abc9c;
+      }
     </style>
   </head>
   <body>
     <main>
-      <h1>random user generator</h1>
+      <h1 id="title">random user generator</h1>
       <section id="card">
         <div id="details">
-          <div id="picture"><img src="" alt="" /></div>
+          <div id="picture"><img src="" alt="Avatar" /></div>
           <div id="content">
             <h2 id="name"></h2>
             <h4 id="nickname"></h4>
@@ -47,8 +134,17 @@
   </body>
 
   <script>
+    const url = "https://random-data-api.com/api/v2/users";
     window.addEventListener("load", () => {
-      fetch("https://random-data-api.com/api/v2/users")
+      fetch(url)
+        .then((res) => res.json())
+        .then((person) => {
+          loadData(person);
+        });
+    });
+
+    document.querySelector("button").addEventListener("click", function () {
+      fetch(url)
         .then((res) => res.json())
         .then((person) => {
           loadData(person);
@@ -69,8 +165,10 @@
         "#city"
       ).innerHTML = `${city} ${state}, ${country}`;
       document.querySelector("#email").innerHTML = email;
-      document.querySelector("h2").innerHTML = `${first_name} ${last_name}`;
-      document.querySelector("h4").innerHTML = gender;
+      document.querySelector(
+        "h2"
+      ).innerHTML = `NAME:${first_name} ${last_name}`;
+      document.querySelector("h4").innerHTML = "GENDER: " + gender;
     }
   </script>
 </html>
